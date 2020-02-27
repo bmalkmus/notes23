@@ -28,8 +28,8 @@ notes.get ("/api/notes", function (req, res){
 
 notes.post("/api/notes", function (req, res){
     var NewNote = req.body;
-    res.json(NewNote);
-    fs.appendFile('../../../db/db.json', NewNote, function (err){
+    console.log(NewNote);
+    fs.appendFile('../../../db/db.json', JSON.stringify(NewNote), function (err){
         if 
         (err) throw (err);
         console.log ('Note Saved!');

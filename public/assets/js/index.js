@@ -57,7 +57,6 @@ var handleNoteSave = function() {
     title: $noteTitle.val().trim(),
     text: $noteText.val().trim(),
   };
-
   saveNote(newNote).then(function(data) {
     getAndRenderNotes();
     renderActiveNote();
