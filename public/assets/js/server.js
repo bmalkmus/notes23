@@ -1,5 +1,6 @@
 let express = require("express");
 let path = require("path");
+let fs = require('fs');
 
 let notes = express();
 var PORT = process.env.PORT || 2323;
@@ -20,6 +21,20 @@ notes.get ("/public/assets/js/index.js", function (req, res) {
 notes.get ("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../../index.html"));
 });
+
+notes.get ("/api/notes", function (req, res){
+    res.sendFile(path.join(__dirname, '../../../db/db.json'))
+})
+
+notes.post("/api/notes", function (req, res){
+    var NewNote = req.body;
+    res.json(NewNote);
+    fs.appendFile('../../../db/db.json', NewNote, function (err){
+        if 
+        (err) throw (err);
+        console.log ('Note Saved!');
+    })
+})
 
 notes.get("/notes", function (req, res){
     res.sendFile(path.join(__dirname, "../../notes.html"));
