@@ -33,6 +33,7 @@ notes.post("/api/notes", function (req, res){
         if 
         (err) throw (err);
         console.log ('Note Saved!');
+        res.send("finished");
     })
 })
 
