@@ -32,6 +32,8 @@ notes.post("/api/notes", function (req, res){
     data = JSON.parse(data);
     console.log(data);
     var NewNote = req.body;
+    NewNote.id = NewNote.title;
+    console.log(NewNote);
     data.push(NewNote);
     data = JSON.stringify(data);
     fs.writeFile(json, data, function (err){
@@ -44,6 +46,35 @@ notes.post("/api/notes", function (req, res){
 notes.get("/notes", function (req, res){
     res.sendFile(path.join(__dirname, "../../notes.html"));
 });
+
+notes.get('/api/notes/:id', function(req,res){
+    var typedID = req.params.id;
+    let data = fs.readFileSync(json, 'utf8');
+    data = JSON.parse(data);
+    for (let i = 0; i < data.length; i++){
+        if (typedID === data[i].id){
+            return res.json(data[i]);
+        }
+    }
+
+})
+
+notes.delete('/api/notes/:id', function (req, res){
+    var clickedID = req.params.id;
+    let data = fs.readFileSync(json, 'utf8');
+    data = JSON.parse(data);
+    for (let i = 0; i < data.length; i++){
+        if (clickedID === data[i].id){
+            data.splice(i, 1);
+            data = JSON.stringify(data);
+            fs.writeFile(json, data, function (err){
+                if (err) throw (err);
+            
+            })   
+        }
+    }
+    res.send('Note Deleted');
+})
 
 notes.listen(PORT, function () {
     console.log ("NoteTaker is listening on Port " + PORT);
