@@ -39,13 +39,6 @@ notes.post("/api/notes", function (req, res){
         console.log ('Note Saved!');
         res.send("finished");
     })
-
-    
-    // fs.appendFile(json, JSON.stringify(NewNote), function (err){
-    //     if (err) throw (err);
-    //     console.log ('Note Saved!');
-    //     res.send("finished");
-    // })
 })
 
 notes.get("/notes", function (req, res){
