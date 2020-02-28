@@ -76,6 +76,10 @@ notes.delete('/api/notes/:id', function (req, res){
     res.send('Note Deleted');
 })
 
+notes.get('*',function (req, res) {
+    res.redirect('/');
+});
+
 notes.listen(PORT, function () {
     console.log ("NoteTaker is listening on Port " + PORT);
 })
