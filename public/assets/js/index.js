@@ -20,7 +20,7 @@ var saveNote = function(note) {
   console.log(note);
   return $.ajax({
     url: "/api/notes",
-    data: note,
+    data: note, 
     method: "POST"
   });
 };
@@ -56,8 +56,7 @@ var handleNoteSave = function() {
     title: $noteTitle.val().trim(),
     text: $noteText.val().trim(),
   };
-  var test = saveNote(newNote);
-  test.then(function(data) {
+  saveNote(newNote).then(function(data) {
     console.log(data);
     getAndRenderNotes();
     renderActiveNote();

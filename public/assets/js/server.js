@@ -1,6 +1,7 @@
 let express = require("express");
 let path = require("path");
 let fs = require('fs');
+let json = "../../../db/db.json"
 
 let notes = express();
 var PORT = process.env.PORT || 2323;
@@ -23,18 +24,28 @@ notes.get ("/", function (req, res) {
 });
 
 notes.get ("/api/notes", function (req, res){
-    res.sendFile(path.join(__dirname, '../../../db/db.json'))
+    res.sendFile(path.join(__dirname, json))
 })
 
 notes.post("/api/notes", function (req, res){
+    let data = fs.readFileSync(json, 'utf8');
+    data = JSON.parse(data);
+    console.log(data);
     var NewNote = req.body;
-    console.log(NewNote);
-    fs.appendFile('../../../db/db.json', JSON.stringify(NewNote), function (err){
-        if 
-        (err) throw (err);
+    data.push(NewNote);
+    data = JSON.stringify(data);
+    fs.writeFile(json, data, function (err){
+        if (err) throw (err);
         console.log ('Note Saved!');
         res.send("finished");
     })
+
+    
+    // fs.appendFile(json, JSON.stringify(NewNote), function (err){
+    //     if (err) throw (err);
+    //     console.log ('Note Saved!');
+    //     res.send("finished");
+    // })
 })
 
 notes.get("/notes", function (req, res){
