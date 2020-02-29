@@ -25,10 +25,8 @@ notes.get ("/api/notes", function (req, res){
 notes.post("/api/notes", function (req, res){
     let data = fs.readFileSync(json, 'utf8');
     data = JSON.parse(data);
-    console.log(data);
     var NewNote = req.body;
     NewNote.id = NewNote.title;
-    console.log(NewNote);
     data.push(NewNote);
     data = JSON.stringify(data);
     fs.writeFile(json, data, function (err){
