@@ -18,6 +18,10 @@ notes.get ("/public/assets/js/index.js", function (req, res) {
     res.sendFile(path.join(__dirname, '../../../public/assets/js/index.js'));
 });
 
+notes.get('/',function (req, res) {
+    res.sendFile(path.join(__dirname, "../../index.html"));;
+});
+
 notes.get ("/api/notes", function (req, res){
     res.sendFile(path.join(__dirname, json))
 })
