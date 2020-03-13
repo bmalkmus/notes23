@@ -1,7 +1,7 @@
 let express = require("express");
 let path = require("path");
 let fs = require('fs');
-let json = "../../../db/db.json"
+let json = "../notes23/db/db.json"
 
 let notes = express();
 var PORT = process.env.PORT || 2323;
@@ -11,15 +11,15 @@ notes.use(express.json());
 // notes.use('/static', express.static(path.join(__dirname, 'public')));
 
 notes.get ("/public/assets/css/styles.css", function (req, res) {
-    res.sendFile(path.join(__dirname, '../../../public/assets/css/styles.css'));
+    res.sendFile(path.join(__dirname, '/public/assets/css/styles.css'));
 });
 
 notes.get ("/public/assets/js/index.js", function (req, res) {
-    res.sendFile(path.join(__dirname, '../../../public/assets/js/index.js'));
+    res.sendFile(path.join(__dirname, '/public/assets/js/index.js'));
 });
 
 notes.get('/',function (req, res) {
-    res.sendFile(path.join(__dirname, "../../index.html"));;
+    res.sendFile(path.join(__dirname, "/public/index.html"));;
 });
 
 notes.get ("/api/notes", function (req, res){
@@ -41,7 +41,7 @@ notes.post("/api/notes", function (req, res){
 })
 
 notes.get("/notes", function (req, res){
-    res.sendFile(path.join(__dirname, "../../notes.html"));
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
 notes.get('/api/notes/:id', function(req,res){
@@ -74,7 +74,7 @@ notes.delete('/api/notes/:id', function (req, res){
 })
 
 notes.get('*',function (req, res) {
-    res.sendFile(path.join(__dirname, "../../index.html"));;
+    res.sendFile(path.join(__dirname, "/public/index.html"));;
 });
 
 notes.listen(PORT, function () {
