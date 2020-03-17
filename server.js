@@ -1,7 +1,7 @@
 let express = require("express");
 let path = require("path");
 let fs = require('fs');
-let json = "../notes23/db/db.json"
+let json = './db/db.json'
 
 let notes = express();
 var PORT = process.env.PORT || 2323;
